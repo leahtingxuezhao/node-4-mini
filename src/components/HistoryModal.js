@@ -1,19 +1,20 @@
-import React, { Component } from 'react';
-import './HistoryModal.css';
+import axios from "axios";
+import React, { Component } from "react";
+import "./HistoryModal.css";
 
 export default class HistoryModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      historyMessages: []
+      historyMessages: [],
     };
   }
 
-  
   componentDidMount() {
-    // create request here
+    axios
+      .get("/api/messages/history")
+      .then((res) => this.setState({ historyMessages: res.data }));
   }
-  
 
   render() {
     let historyMessages = this.state.historyMessages.map((messageObj, i) => {
